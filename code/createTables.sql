@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `Orders` (
   `client_id` BIGINT UNSIGNED NOT NULL,
   `discount_id` BIGINT UNSIGNED DEFAULT NULL,
   `total_amount` INT NOT NULL DEFAULT 0,
+  `due_date` DATETIME NOT NULL,
   FOREIGN KEY(client_id) REFERENCES Client_User(client_id),
   FOREIGN KEY(discount_id) REFERENCES Discount(discount_id)
 );
@@ -128,8 +129,37 @@ CREATE TABLE IF NOT EXISTS `Invoice` (
 
 -- The source table to track the changes
 CREATE TABLE `Log` (
-	  id   INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	  timestamp   TIMESTAMP,
+	  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	  timestamp TIMESTAMP,
 	  data1 VARCHAR(255) NOT NULL,
-	  data2  DECIMAL(5,2) NOT NULL 
+	  data2 DECIMAL(5,2) NOT NULL 
 );
+/*
+CREATE TABLE `slow_log` (
+   `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   `user_host` mediumtext NOT NULL,
+   `query_time` time NOT NULL,
+   `lock_time` time NOT NULL,
+   `rows_sent` int(11) NOT NULL,
+   `rows_examined` int(11) NOT NULL,
+   `db` varchar(512) NOT NULL,
+   `last_insert_id` int(11) NOT NULL,
+   `insert_id` int(11) NOT NULL,
+   `server_id` int(10) unsigned NOT NULL,
+   `sql_text` mediumtext NOT NULL,
+   `thread_id` bigint(21) unsigned NOT NULL
+);
+
+CREATE TABLE `general_log` (
+   `event_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   `user_host` mediumtext NOT NULL,
+   `thread_id` bigint(21) unsigned NOT NULL,
+   `server_id` int(10) unsigned NOT NULL,
+   `command_type` varchar(64) NOT NULL,
+   `argument` mediumtext NOT NULL
+);
+
+-- Enable Query logging on the database
+SET global general_log = 1;
+SET global log_output = 'table';
+*/

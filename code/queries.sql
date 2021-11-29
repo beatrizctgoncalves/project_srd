@@ -1,12 +1,11 @@
 -- Exercise 1
 USE database_womensmell;
 
-/*SELECT concat(Client_User.client_name, ' ', Client_User.client_surname) AS Client_Name, Orders.create_time as Order_Date, Product.product_name as Product_Name
-FROM Orders, Order_Product, Client_User, Product
-WHERE Orders.order_id = Order_Product.order_id AND Orders.client_id = Client_User.client_id AND Order_Product.order_product_id = Product.product_id
-AND Orders.create_time > '2020-01-01 08:00:00' AND Orders.create_time < '2020-08-21 23:59:59';
-*/
-SELECT * FROM Log;
+SELECT concat(CU.client_name, ' ', CU.client_surname) AS Client_Name, O.due_date AS Order_Date, F.fragrance_name AS Product_Name
+FROM Orders AS O, Order_Product AS OP, Client_User AS CU, Fragrance AS F, Product AS P
+WHERE O.order_id = OP.order_id AND O.client_id = CU.client_id AND OP.product_id = P.product_id AND P.fragrance_id = F.fragrance_id
+AND O.due_date > '2020-01-01 08:00:00' AND O.due_date < '2020-12-31 23:59:59';
+
 -- Exercise 2
 
 -- Exercise 3
