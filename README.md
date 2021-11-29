@@ -5,3 +5,4 @@
   - Mudar os dados do ficheiro insertValues.sql para um ficheiro data.xlsx
   - Adicionar os nº de aluno no report
   - Queries 2, 3 e 4
+  - Criar views
