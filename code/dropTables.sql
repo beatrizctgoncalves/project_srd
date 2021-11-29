@@ -1,14 +1,14 @@
 DROP TABLE `Log`;
-DROP TABLE `All_Data`;
 DROP TABLE `Invoice`;
 DROP TABLE `Order_Product`;
 DROP TABLE `Orders`;
 DROP TABLE `Discount`;
 DROP TABLE `Product_Rating`;
 DROP TABLE `Product`;
+DROP TABLE `Fragrance`;
 DROP TABLE `Product_Size`;
 DROP TABLE `Product_Color`;
-DROP TABLE `Product_Class`;
+DROP TABLE `Fragrance_Class`;
 DROP TABLE `Warehouse`;
 DROP TABLE `Client_Address`;
 DROP TABLE `Client_User`;

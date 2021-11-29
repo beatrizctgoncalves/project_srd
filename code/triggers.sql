@@ -1,36 +1,18 @@
 -- Add a log entry for insert actions
 -- This will record action time and newly added data values
+DROP TRIGGER IF EXISTS insert_data; 
 DELIMITER $$
-CREATE TRIGGER ai_data AFTER INSERT ON All_Data
-FOR EACH ROW
-BEGIN
-  INSERT INTO `Log` (act, action_time, id, time_stamp, data1, data2)
-  VALUES('insert', NOW(), NEW.id, NEW.time_stamp, NEW.data1, NEW.data2);
-END$$
-DELIMITER ;
-/*
--- Add a log entry for update actions
-DELIMITER $$
-CREATE TRIGGER au_data AFTER UPDATE ON All_Data
-FOR EACH ROW
-BEGIN
-  INSERT INTO `Log` (act, action_time, id, time_stamp, data1, data2)
-  VALUES('update', NOW(), NEW.id, NEW.time_stamp, NEW.data1, NEW.data2);
-END$$
+CREATE TRIGGER ai_data AFTER INSERT ON Log
+	FOR EACH ROW
+	BEGIN
+	  INSERT INTO data_log (action, id, timestamp, data1, data2)
+	  VALUES('insert', NEW.id, NOW(), NEW.data1, NEW.data2);
+	END$$
 DELIMITER ;
 
--- Add a log entry for delete actions
--- This will log the existing values of the deleted row
-DELIMITER $$
-CREATE TRIGGER ad_data AFTER DELETE ON All_Data
-FOR EACH ROW
-BEGIN
-  INSERT INTO `Log` (act, action_time, id, time_stamp, data1, data2)
-  VALUES('delete', NOW(), OLD.id, OLD.time_stamp, OLD.data1, OLD.data2);
-END$$
-DELIMITER ;*/
 
 -- Update the available stock of products
+DROP TRIGGER IF EXISTS StockUpdate;
 DELIMITER $$
 CREATE TRIGGER StockUpdate
 AFTER INSERT ON Order_Product
