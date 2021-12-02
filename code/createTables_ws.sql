@@ -16,49 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `All_Data`
---
-
-DROP TABLE IF EXISTS `All_Data`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `All_Data` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `time_stamp` timestamp NULL DEFAULT NULL,
-  `data1` varchar(255) NOT NULL,
-  `data2` decimal(5,2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `All_Data`
---
-
-LOCK TABLES `All_Data` WRITE;
-/*!40000 ALTER TABLE `All_Data` DISABLE KEYS */;
-/*!40000 ALTER TABLE `All_Data` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `ai_data` AFTER INSERT ON `all_data` FOR EACH ROW BEGIN
-  INSERT INTO `Log` (act, action_time, id, time_stamp, data1, data2)
-  VALUES('insert', NOW(), NEW.id, NEW.time_stamp, NEW.data1, NEW.data2);
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
 -- Table structure for table `Client_Address`
 --
 
@@ -271,12 +228,11 @@ DROP TABLE IF EXISTS `Log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Log` (
-  `act` varchar(255) DEFAULT NULL,
-  `action_time` timestamp NULL DEFAULT NULL,
-  `id` int DEFAULT NULL,
-  `time_stamp` timestamp NULL DEFAULT NULL,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `timestamp` timestamp NULL DEFAULT NULL,
   `data1` varchar(255) NOT NULL,
-  `data2` decimal(5,2) NOT NULL
+  `data2` decimal(5,2) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -288,6 +244,24 @@ LOCK TABLES `Log` WRITE;
 /*!40000 ALTER TABLE `Log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Log` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `insert_data` AFTER INSERT ON `log` FOR EACH ROW BEGIN
+	  INSERT INTO Log (action, id, timestamp, data1, data2)
+		VALUES('insert', NEW.id, NOW(), NEW.data1, NEW.data2);
+	END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `Order_Product`
@@ -307,7 +281,7 @@ CREATE TABLE `Order_Product` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `order_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `Orders` (`order_id`),
   CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -316,7 +290,7 @@ CREATE TABLE `Order_Product` (
 
 LOCK TABLES `Order_Product` WRITE;
 /*!40000 ALTER TABLE `Order_Product` DISABLE KEYS */;
-INSERT INTO `Order_Product` VALUES (1,1,1,1),(2,2,20,2),(3,2,19,1),(4,2,18,3),(5,2,17,4),(6,3,16,5),(7,3,15,2),(8,4,14,1),(9,5,13,1),(10,5,12,2),(11,5,11,1),(12,5,10,1),(13,6,9,4),(14,6,8,3),(15,7,7,5),(16,8,6,2),(17,8,5,1),(18,9,4,2),(19,10,3,1),(20,11,2,2),(21,11,1,1),(22,11,2,3),(23,12,3,1),(24,12,4,4),(25,13,5,1);
+INSERT INTO `Order_Product` VALUES (1,1,1,1),(2,2,20,2),(3,3,19,1),(4,4,18,3),(5,5,17,4),(6,6,16,5),(7,7,15,2),(8,8,14,1),(9,9,13,1),(10,10,12,2),(11,11,11,1),(12,12,10,1),(13,13,9,4),(14,14,8,3),(15,15,7,5),(16,16,6,2),(17,17,5,1),(18,18,4,2),(19,19,3,1),(20,20,2,2);
 /*!40000 ALTER TABLE `Order_Product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -351,6 +325,7 @@ CREATE TABLE `Orders` (
   `client_id` bigint unsigned NOT NULL,
   `discount_id` bigint unsigned DEFAULT NULL,
   `total_amount` int NOT NULL DEFAULT '0',
+  `due_date` datetime NOT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_id` (`order_id`),
   KEY `client_id` (`client_id`),
@@ -366,7 +341,7 @@ CREATE TABLE `Orders` (
 
 LOCK TABLES `Orders` WRITE;
 /*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
-INSERT INTO `Orders` VALUES (1,1,1,85),(2,2,2,219),(3,3,3,105),(4,4,1,30),(5,5,2,303),(6,22,3,57),(7,10,1,81),(8,2,2,156),(9,1,3,97),(10,4,1,81),(11,8,1,259),(12,9,2,83),(13,10,1,81),(14,11,1,57),(15,12,1,105),(16,13,1,195),(17,14,2,81),(18,11,3,16),(19,15,1,41),(20,17,2,49);
+INSERT INTO `Orders` VALUES (1,1,1,85,'2019-10-04 08:12:34'),(2,2,2,219,'2020-10-04 17:12:34'),(3,3,3,105,'2020-01-10 18:21:09'),(4,4,1,30,'2019-12-14 17:03:26'),(5,5,2,303,'2020-12-12 16:03:27'),(6,6,3,57,'2019-10-29 12:31:36'),(7,7,1,81,'2019-08-17 13:15:43'),(8,8,2,156,'2019-08-08 21:30:56'),(9,9,3,97,'2019-07-14 20:10:22'),(10,10,1,81,'2019-07-04 10:20:12'),(11,11,1,259,'2019-06-24 18:04:21'),(12,12,2,83,'2020-10-04 09:45:22'),(13,13,1,81,'2019-06-02 19:33:38'),(14,14,1,57,'2019-05-18 16:10:27'),(15,15,1,105,'2019-05-14 15:10:49'),(16,16,1,195,'2020-03-19 14:00:51'),(17,17,2,81,'2020-03-10 22:00:40'),(18,18,3,16,'2020-02-28 11:10:15'),(19,19,1,41,'2020-03-01 12:35:24'),(20,20,2,49,'2020-10-04 10:23:11');
 /*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -404,7 +379,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,1,1,1,1,16.2,8),(2,2,3,2,1,20.25,0),(3,3,2,3,1,24.99,4),(4,4,4,4,1,40.5,2),(5,5,5,5,1,35.99,5),(6,6,6,1,1,45.49,7),(7,7,1,2,1,64.8,6),(8,8,2,3,1,44.5,9),(9,9,3,4,1,36.45,2),(10,10,4,5,1,48.6,6),(11,11,5,1,1,81,7),(12,12,6,2,1,97.2,7),(13,1,1,3,1,81,5),(14,2,2,4,1,145.8,5),(15,3,3,5,1,32.4,5),(16,4,4,1,1,52.65,2),(17,5,5,2,1,64.8,4),(18,6,6,3,1,52.65,5),(19,7,1,4,1,19.99,4),(20,8,2,5,1,29.99,7);
+INSERT INTO `Product` VALUES (1,1,1,1,1,16.2,9),(2,2,3,2,1,20.25,3),(3,3,2,3,1,24.99,5),(4,4,4,4,1,40.5,6),(5,5,5,5,1,35.99,6),(6,6,6,1,1,45.49,7),(7,7,1,2,1,64.8,6),(8,8,2,3,1,44.5,9),(9,9,3,4,1,36.45,2),(10,10,4,5,1,48.6,6),(11,11,5,1,1,81,7),(12,12,6,2,1,97.2,7),(13,1,1,3,1,81,5),(14,2,2,4,1,145.8,5),(15,3,3,5,1,32.4,5),(16,4,4,1,1,52.65,2),(17,5,5,2,1,64.8,4),(18,6,6,3,1,52.65,5),(19,7,1,4,1,19.99,4),(20,8,2,5,1,29.99,7);
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -527,4 +502,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-29 20:38:14
+-- Dump completed on 2021-12-02 16:11:56

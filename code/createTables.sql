@@ -1,4 +1,4 @@
-#CREATE DATABASE IF NOT EXISTS `database_womensmell`;
+#CREATE DATABASE `database_womensmell`;
 USE database_womensmell;
 
 
