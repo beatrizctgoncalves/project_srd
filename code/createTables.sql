@@ -1,4 +1,4 @@
-CREATE DATABASE `database_womensmell`;
+#CREATE DATABASE `database_womensmell`;
 USE database_womensmell;
 
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `Product_Rating` (
   `product_rating_id` SERIAL NOT NULL PRIMARY KEY,
   `product_id` BIGINT UNSIGNED NOT NULL,
   `client_id` BIGINT UNSIGNED NOT NULL,
-  `grade` INTEGER CHECK (`grade` > 0 AND `grade` < 6),
+  `grade` INTEGER CHECK (`grade` > 0 AND `grade` < 11),
   FOREIGN KEY(product_id) REFERENCES Product(product_id),
   FOREIGN KEY(client_id) REFERENCES Client_User(client_id)
 );
@@ -131,32 +131,3 @@ CREATE TABLE `Log` (
 	  data1 VARCHAR(255) NOT NULL,
 	  data2 DECIMAL(5,2) NOT NULL 
 );
-/*
-CREATE TABLE `slow_log` (
-   `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   `user_host` mediumtext NOT NULL,
-   `query_time` time NOT NULL,
-   `lock_time` time NOT NULL,
-   `rows_sent` int(11) NOT NULL,
-   `rows_examined` int(11) NOT NULL,
-   `db` varchar(512) NOT NULL,
-   `last_insert_id` int(11) NOT NULL,
-   `insert_id` int(11) NOT NULL,
-   `server_id` int(10) unsigned NOT NULL,
-   `sql_text` mediumtext NOT NULL,
-   `thread_id` bigint(21) unsigned NOT NULL
-);
-
-CREATE TABLE `general_log` (
-   `event_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   `user_host` mediumtext NOT NULL,
-   `thread_id` bigint(21) unsigned NOT NULL,
-   `server_id` int(10) unsigned NOT NULL,
-   `command_type` varchar(64) NOT NULL,
-   `argument` mediumtext NOT NULL
-);
-
--- Enable Query logging on the database
-SET global general_log = 1;
-SET global log_output = 'table';
-*/

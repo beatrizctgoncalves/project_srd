@@ -42,7 +42,7 @@ CREATE TABLE `Client_Address` (
 
 LOCK TABLES `Client_Address` WRITE;
 /*!40000 ALTER TABLE `Client_Address` DISABLE KEYS */;
-INSERT INTO `Client_Address` VALUES (1,1,'Rua Cassiano Branco Bairro dos Loios Escola Secundária Damião de Góis','Lisboa',' 1950-005','Portugal'),(2,2,'Rua Cassiano Branco Bairro dos Loios Escola 1ºCiclo Ensino Básico 9','Lisboa','1950-005','Portugal'),(3,3,'Rua Cassiano Branco Bairro dos Loios Lt 221 Lj','Lisboa','1950-005','Portugal'),(4,4,'Rua Cassiano Branco Bairro dos Loios Lt 221','Lisboa','1950-005','Portugal'),(5,5,'Impasse à Rua José do Patrocínio Lt 1','Lisboa','1950-005','Portugal'),(6,6,'Impasse à Rua José do Patrocínio Lt 2','Lisboa','1950-005','Portugal'),(7,7,'Impasse à Rua José do Patrocínio Lt 3','Lisboa','1950-005','Portugal'),(8,8,'Impasse à Rua José do Patrocínio Lt 4','Lisboa','1950-005','Portugal'),(9,9,'Rua Actriz Palmira Bastos Bairro das Amendoeiras Pares de 10','Lisboa','1950-005','Portugal'),(10,10,'Rua Capitão Leitão Ímpares de 5','Lisboa','1950-005','Portugal'),(11,11,'Rua Capitão Leitão JCA','Lisboa','1950-005','Portugal'),(12,12,'Rua Capitão Leitão JCB','Lisboa','1950-005','Portugal'),(13,13,'Rua Capitão Leitão Pares de 10','Lisboa','1950-005','Portugal'),(14,14,'Travessa Frei Carlos Vila Cartuxa','Évora','7000-737','Portugal'),(15,15,'Praça Marcolino Sousa','Évora','7000-737','Portugal'),(16,16,'Rua Doutor João Vieira da Silva','Évora','7000-737','Portugal'),(17,17,'Rua Frei Carlos','Évora','7000-737','Portugal'),(18,18,'Rua Associação de Moradores de São Vítor','Porto','4000-009','Portugal'),(19,19,'Rua Aquilino Ribeiro Bairro de Santa Apolónia','Coimbra','3020-009','Portugal'),(20,20,'Rua Bernardo de Santareno Bairro de Santa Apolónia','Coimbra','3020-009','Portugal'),(21,21,'Rua Ferreira de Castro Bairro de Santa Apolónia','Coimbra','3020-009','Portugal'),(22,22,'Rua Aurélia de Sousa','Porto','4000-009','Portugal'),(23,23,'Praceta da Primavera','Albufeira','8200-008','Portugal'),(24,24,'Praceta Samora Barros','Albufeira','8200-008','Portugal'),(25,25,'Rua de António Emílio de Magalhães','Porto','4000-009','Portugal');
+INSERT INTO `Client_Address` VALUES (1,1,'Rua Cassiano Branco Bairro dos Loios Escola Secundária Damião de Góis','Lisboa',' 1950-005','Portugal'),(2,2,'Rua Cassiano Branco Bairro dos Loios Escola 1ºCiclo Ensino Básico 9','Lisboa','1950-005','Portugal'),(3,3,'Rua Cassiano Branco Bairro dos Loios Lt 221 Lj','Lisboa','1950-005','Portugal'),(4,4,'Rua Cassiano Branco Bairro dos Loios Lt 221','Lisboa','1950-005','Portugal'),(5,5,'Impasse à Rua José do Patrocínio Lt 1','Lisboa','1950-005','Portugal'),(6,23,'Impasse à Rua José do Patrocínio Lt 2','Lisboa','1950-005','Portugal'),(7,24,'Impasse à Rua José do Patrocínio Lt 3','Lisboa','1950-005','Portugal'),(8,8,'Impasse à Rua José do Patrocínio Lt 4','Lisboa','1950-005','Portugal'),(9,9,'Rua Actriz Palmira Bastos Bairro das Amendoeiras Pares de 10','Lisboa','1950-005','Portugal'),(10,10,'Rua Capitão Leitão Ímpares de 5','Lisboa','1950-005','Portugal'),(11,11,'Rua Capitão Leitão JCA','Santarém','2000-405','Portugal'),(12,12,'Rua Capitão Leitão JCB','Santarém','2000-405','Portugal'),(13,13,'Rua Capitão Leitão Pares de 10','Lisboa','1950-005','Portugal'),(14,14,'Travessa Frei Carlos Vila Cartuxa','Évora','7000-737','Portugal'),(15,15,'Praça Marcolino Sousa','Évora','7000-737','Portugal'),(16,16,'Rua Doutor João Vieira da Silva','Évora','7000-737','Portugal'),(17,17,'Rua Frei Carlos','Évora','7000-737','Portugal'),(18,18,'Rua Associação de Moradores de São Vítor','Porto','4000-009','Portugal'),(19,19,'Rua Aquilino Ribeiro Bairro de Santa Apolónia','Coimbra','3020-009','Portugal'),(20,20,'Rua Bernardo de Santareno Bairro de Santa Apolónia','Coimbra','3020-009','Portugal'),(21,21,'Rua Ferreira de Castro Bairro de Santa Apolónia','Coimbra','3020-009','Portugal'),(22,22,'Rua Aurélia de Sousa','Porto','4000-009','Portugal'),(23,6,'Praceta da Primavera','Albufeira','8200-008','Portugal'),(24,7,'Praceta Samora Barros','Albufeira','8200-008','Portugal'),(25,25,'Rua de António Emílio de Magalhães','Porto','4000-009','Portugal');
 /*!40000 ALTER TABLE `Client_Address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +131,7 @@ CREATE TABLE `Discount` (
 
 LOCK TABLES `Discount` WRITE;
 /*!40000 ALTER TABLE `Discount` DISABLE KEYS */;
-INSERT INTO `Discount` VALUES (1,'0% discount','no discount',5,1),(2,'10% discount','special offer',10,1),(3,'20% discount','black friday',0,1);
+INSERT INTO `Discount` VALUES (1,'0% discount','no discount',0,1),(2,'10% discount','special offer',10,1),(3,'20% discount','black friday',20,1);
 /*!40000 ALTER TABLE `Discount` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +146,7 @@ CREATE TABLE `Fragrance` (
   `fragrance_id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `fragrance_class_id` bigint unsigned NOT NULL,
   `fragrance_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`fragrance_id`,`fragrance_class_id`),
+  PRIMARY KEY (`fragrance_id`),
   UNIQUE KEY `fragrance_id` (`fragrance_id`),
   KEY `fragrance_class_id` (`fragrance_class_id`),
   CONSTRAINT `fragrance_ibfk_1` FOREIGN KEY (`fragrance_class_id`) REFERENCES `Fragrance_Class` (`fragrance_class_id`)
@@ -198,9 +198,8 @@ DROP TABLE IF EXISTS `Invoice`;
 CREATE TABLE `Invoice` (
   `invoice_id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `order_id` bigint unsigned NOT NULL,
-  `sales_amount` float NOT NULL,
   `tax_rate` float NOT NULL,
-  `tax_amount` float NOT NULL,
+  `subtotal` float NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `due_date` date NOT NULL,
   PRIMARY KEY (`invoice_id`),
@@ -216,9 +215,55 @@ CREATE TABLE `Invoice` (
 
 LOCK TABLES `Invoice` WRITE;
 /*!40000 ALTER TABLE `Invoice` DISABLE KEYS */;
-INSERT INTO `Invoice` VALUES (1,1,0,0.23,19.55,1,'2019-04-06'),(2,2,21.87,0.23,50.3,1,'2019-04-15'),(3,3,21.04,0.23,24.2,1,'2019-04-17'),(4,4,0,0.23,6.9,1,'2019-04-18'),(5,5,30.35,0.23,69.8,1,'2019-08-05'),(6,6,11.48,0.23,13.2,1,'2019-08-06'),(7,7,0,0.23,18.63,1,'2019-08-15'),(8,8,15.58,0.23,35.83,1,'2019-08-24'),(9,9,19.44,0.23,22.36,1,'2019-05-19'),(10,10,0,0.23,18.63,1,'2019-05-23'),(11,11,0,0.23,59.62,1,'2019-06-07'),(12,12,8.3,0.23,19,1,'2019-06-29'),(13,13,0,0.23,18.63,1,'2019-07-09'),(14,14,0,0.23,13.2,1,'2019-07-19'),(15,15,0,0.23,24.22,1,'2019-08-13'),(16,16,0,0.23,44.82,1,'2019-08-22'),(17,17,8.1,0.23,18.63,1,'2019-11-03'),(18,18,3.24,0.23,3.73,1,'2019-12-17'),(19,19,0,0.23,9.32,1,'2019-12-19'),(20,20,4.86,0.23,11.18,1,'2020-01-15');
+INSERT INTO `Invoice` VALUES (1,1,23,16.2,1,'2020-04-06'),(2,2,23,59.98,1,'2018-04-15'),(3,3,23,19.99,1,'2019-04-17'),(4,4,23,157.95,1,'2019-04-18'),(5,5,23,259.2,1,'2018-08-05'),(6,6,23,263.25,1,'2021-08-06'),(7,7,23,64.8,1,'2018-08-15'),(8,8,23,145.8,1,'2020-08-24'),(9,9,23,81,1,'2019-05-19'),(10,10,23,194.4,1,'2019-05-23'),(11,11,23,81,1,'2020-06-07'),(12,12,23,48.6,1,'2019-06-29'),(13,13,23,145.8,1,'2019-07-09'),(14,14,23,133.5,1,'2021-07-19'),(15,15,23,324,1,'2021-08-13'),(16,16,23,90.98,1,'2018-08-22'),(17,17,23,35.99,1,'2019-11-03'),(18,18,23,81,1,'2019-12-17'),(19,19,23,24.99,1,'2020-12-19'),(20,20,23,40.5,1,'2020-01-15');
 /*!40000 ALTER TABLE `Invoice` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `invoice_details_view`
+--
+
+DROP TABLE IF EXISTS `invoice_details_view`;
+/*!50001 DROP VIEW IF EXISTS `invoice_details_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `invoice_details_view` AS SELECT 
+ 1 AS `INVOICE NUMBER`,
+ 1 AS `FRAGRANCE NAME`,
+ 1 AS `UNIT COST`,
+ 1 AS `QUANTITY`,
+ 1 AS `AMOUNT`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `invoice_head_totals_view`
+--
+
+DROP TABLE IF EXISTS `invoice_head_totals_view`;
+/*!50001 DROP VIEW IF EXISTS `invoice_head_totals_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `invoice_head_totals_view` AS SELECT 
+ 1 AS `INVOICE NUMBER`,
+ 1 AS `DATE OF ISSUE`,
+ 1 AS `Client Name`,
+ 1 AS `Street Address`,
+ 1 AS `City`,
+ 1 AS `Country`,
+ 1 AS `Postal Code`,
+ 1 AS `Company Name`,
+ 1 AS `Company Address`,
+ 1 AS `Company Phone`,
+ 1 AS `Company E-mail`,
+ 1 AS `Company Website`,
+ 1 AS `TERMS`,
+ 1 AS `SUBTOTAL`,
+ 1 AS `DISCOUNT RATE (%)`,
+ 1 AS `DISCOUNT`,
+ 1 AS `TAX RATE (%)`,
+ 1 AS `TAX`,
+ 1 AS `TOTAL`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `Log`
@@ -290,7 +335,7 @@ CREATE TABLE `Order_Product` (
 
 LOCK TABLES `Order_Product` WRITE;
 /*!40000 ALTER TABLE `Order_Product` DISABLE KEYS */;
-INSERT INTO `Order_Product` VALUES (1,1,1,1),(2,2,20,2),(3,3,19,1),(4,4,18,3),(5,5,17,4),(6,6,16,5),(7,7,15,2),(8,8,14,1),(9,9,13,1),(10,10,12,2),(11,11,11,1),(12,12,10,1),(13,13,9,4),(14,14,8,3),(15,15,7,5),(16,16,6,2),(17,17,5,1),(18,18,4,2),(19,19,3,1),(20,20,2,2);
+INSERT INTO `Order_Product` VALUES (1,1,1,1),(2,2,2,2),(3,3,3,1),(4,4,4,3),(5,5,5,4),(6,6,5,5),(7,7,6,2),(8,8,6,1),(9,9,7,1),(10,10,8,2),(11,11,8,1),(12,12,9,1),(13,13,9,4),(14,14,8,3),(15,15,7,5),(16,16,6,2),(17,17,5,1),(18,18,4,2),(19,19,3,1),(20,20,2,2);
 /*!40000 ALTER TABLE `Order_Product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -324,7 +369,6 @@ CREATE TABLE `Orders` (
   `order_id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `client_id` bigint unsigned NOT NULL,
   `discount_id` bigint unsigned DEFAULT NULL,
-  `total_amount` int NOT NULL DEFAULT '0',
   `due_date` datetime NOT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_id` (`order_id`),
@@ -341,7 +385,7 @@ CREATE TABLE `Orders` (
 
 LOCK TABLES `Orders` WRITE;
 /*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
-INSERT INTO `Orders` VALUES (1,1,1,85,'2019-10-04 08:12:34'),(2,2,2,219,'2020-10-04 17:12:34'),(3,3,3,105,'2020-01-10 18:21:09'),(4,4,1,30,'2019-12-14 17:03:26'),(5,5,2,303,'2020-12-12 16:03:27'),(6,6,3,57,'2019-10-29 12:31:36'),(7,7,1,81,'2019-08-17 13:15:43'),(8,8,2,156,'2019-08-08 21:30:56'),(9,9,3,97,'2019-07-14 20:10:22'),(10,10,1,81,'2019-07-04 10:20:12'),(11,11,1,259,'2019-06-24 18:04:21'),(12,12,2,83,'2020-10-04 09:45:22'),(13,13,1,81,'2019-06-02 19:33:38'),(14,14,1,57,'2019-05-18 16:10:27'),(15,15,1,105,'2019-05-14 15:10:49'),(16,16,1,195,'2020-03-19 14:00:51'),(17,17,2,81,'2020-03-10 22:00:40'),(18,18,3,16,'2020-02-28 11:10:15'),(19,19,1,41,'2020-03-01 12:35:24'),(20,20,2,49,'2020-10-04 10:23:11');
+INSERT INTO `Orders` VALUES (1,1,1,'2018-10-04 08:12:34'),(2,2,2,'2020-10-04 17:12:34'),(3,3,3,'2020-01-10 18:21:09'),(4,4,1,'2019-12-14 17:03:26'),(5,5,2,'2020-12-12 16:03:27'),(6,6,3,'2019-10-29 12:31:36'),(7,7,1,'2018-08-17 13:15:43'),(8,8,2,'2019-08-08 21:30:56'),(9,9,3,'2019-07-14 20:10:22'),(10,10,1,'2019-07-04 10:20:12'),(11,11,1,'2019-06-24 18:04:21'),(12,12,2,'2020-10-04 09:45:22'),(13,13,1,'2018-06-02 19:33:38'),(14,14,1,'2019-05-18 16:10:27'),(15,15,1,'2019-05-14 15:10:49'),(16,16,1,'2020-03-19 14:00:51'),(17,17,2,'2018-03-10 22:00:40'),(18,18,3,'2021-02-28 11:10:15'),(19,19,1,'2021-03-01 12:35:24'),(20,20,2,'2021-10-04 10:23:11');
 /*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -379,7 +423,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,1,1,1,1,16.2,9),(2,2,3,2,1,20.25,3),(3,3,2,3,1,24.99,5),(4,4,4,4,1,40.5,6),(5,5,5,5,1,35.99,6),(6,6,6,1,1,45.49,7),(7,7,1,2,1,64.8,6),(8,8,2,3,1,44.5,9),(9,9,3,4,1,36.45,2),(10,10,4,5,1,48.6,6),(11,11,5,1,1,81,7),(12,12,6,2,1,97.2,7),(13,1,1,3,1,81,5),(14,2,2,4,1,145.8,5),(15,3,3,5,1,32.4,5),(16,4,4,1,1,52.65,2),(17,5,5,2,1,64.8,4),(18,6,6,3,1,52.65,5),(19,7,1,4,1,19.99,4),(20,8,2,5,1,29.99,7);
+INSERT INTO `Product` VALUES (1,1,1,1,1,16.2,10),(2,2,3,2,1,20.25,5),(3,3,2,3,1,24.99,6),(4,4,4,4,1,40.5,8),(5,5,5,5,1,35.99,7),(6,6,6,1,1,45.49,9),(7,7,1,2,1,64.8,11),(8,8,2,3,1,44.5,12),(9,9,3,4,1,36.45,6),(10,10,4,5,1,48.6,7),(11,11,5,1,1,81,8),(12,12,6,2,1,97.2,9),(13,1,1,3,1,81,6),(14,2,2,4,1,145.8,6),(15,3,3,5,1,32.4,7),(16,4,4,1,1,52.65,7),(17,5,5,2,1,64.8,8),(18,6,6,3,1,52.65,8),(19,7,1,4,1,19.99,5),(20,8,2,5,1,29.99,9);
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -426,8 +470,8 @@ CREATE TABLE `Product_Rating` (
   KEY `client_id` (`client_id`),
   CONSTRAINT `product_rating_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`),
   CONSTRAINT `product_rating_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `Client_User` (`client_id`),
-  CONSTRAINT `product_rating_chk_1` CHECK (((`grade` > 0) and (`grade` < 6)))
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `product_rating_chk_1` CHECK (((`grade` > 0) and (`grade` < 11)))
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -436,7 +480,7 @@ CREATE TABLE `Product_Rating` (
 
 LOCK TABLES `Product_Rating` WRITE;
 /*!40000 ALTER TABLE `Product_Rating` DISABLE KEYS */;
-INSERT INTO `Product_Rating` VALUES (1,1,2,2),(2,2,16,3),(3,3,9,3),(4,4,12,4),(5,5,16,5),(6,7,4,5),(7,8,1,1),(8,6,15,5),(9,1,13,2),(10,10,15,1),(11,3,24,2),(12,5,18,3),(13,6,20,3),(14,7,14,4),(15,7,3,4),(16,8,11,4),(17,9,5,5),(18,10,10,5),(19,3,18,3),(20,9,1,2),(21,8,5,3),(22,4,1,5),(23,7,4,5),(24,3,7,4),(25,4,10,4);
+INSERT INTO `Product_Rating` VALUES (1,1,2,1),(2,2,16,3),(3,3,9,3),(4,4,12,4),(5,5,16,5),(6,7,4,5),(7,8,1,6),(8,6,15,7),(9,1,13,6),(10,10,15,6),(11,3,24,7),(12,5,18,7),(13,6,20,7),(14,7,14,7),(15,7,3,8),(16,8,11,8),(17,9,5,9),(18,10,10,10),(19,3,18,7),(20,9,1,8);
 /*!40000 ALTER TABLE `Product_Rating` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -492,6 +536,42 @@ LOCK TABLES `Warehouse` WRITE;
 INSERT INTO `Warehouse` VALUES (1,'NewSmell Warehouse','Avenida Infante Dom Henrique Armazém O','Lisboa','1950-408');
 /*!40000 ALTER TABLE `Warehouse` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `invoice_details_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `invoice_details_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `invoice_details_view` AS select `I`.`invoice_id` AS `INVOICE NUMBER`,`F`.`fragrance_name` AS `FRAGRANCE NAME`,`P`.`product_price` AS `UNIT COST`,`OP`.`quantity` AS `QUANTITY`,round((`P`.`product_price` * `OP`.`quantity`),2) AS `AMOUNT` from ((((`invoice` `I` join `orders` `O` on((`I`.`order_id` = `O`.`order_id`))) join `order_product` `OP` on((`O`.`order_id` = `OP`.`order_id`))) join `product` `P` on((`OP`.`product_id` = `P`.`product_id`))) join `fragrance` `F` on((`P`.`fragrance_id` = `F`.`fragrance_id`))) order by `I`.`invoice_id` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `invoice_head_totals_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `invoice_head_totals_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `invoice_head_totals_view` AS select `I`.`invoice_id` AS `INVOICE NUMBER`,`I`.`due_date` AS `DATE OF ISSUE`,concat(`CU`.`client_name`,' ',`CU`.`client_surname`) AS `Client Name`,`CA`.`client_address` AS `Street Address`,`CA`.`client_city` AS `City`,`CA`.`client_country` AS `Country`,`CA`.`client_postalcode` AS `Postal Code`,`C`.`company_name` AS `Company Name`,concat(`C`.`company_address`,', ',`C`.`company_postalcode`,' ',`C`.`company_city`,', ',`C`.`company_country`) AS `Company Address`,`C`.`company_phone` AS `Company Phone`,`C`.`company_email` AS `Company E-mail`,`C`.`company_website` AS `Company Website`,cast((`I`.`due_date` + interval 3 day) as date) AS `TERMS`,`I`.`subtotal` AS `SUBTOTAL`,`D`.`discount_value` AS `DISCOUNT RATE (%)`,round((`I`.`subtotal` * (`D`.`discount_value` / 100)),2) AS `DISCOUNT`,`I`.`tax_rate` AS `TAX RATE (%)`,round(((`I`.`subtotal` * (1 - (`D`.`discount_value` / 100))) * (`I`.`tax_rate` / 100)),2) AS `TAX`,round(((`I`.`subtotal` - (`I`.`subtotal` * (`D`.`discount_value` / 100))) + ((`I`.`subtotal` * (1 - (`D`.`discount_value` / 100))) * (`I`.`tax_rate` / 100))),2) AS `TOTAL` from (((((`orders` `O` join `invoice` `I` on((`O`.`order_id` = `I`.`order_id`))) left join `discount` `D` on((`O`.`discount_id` = `D`.`discount_id`))) left join `client_user` `CU` on((`CU`.`client_id` = `O`.`client_id`))) left join `client_address` `CA` on((`CU`.`client_id` = `CA`.`client_id`))) join `company` `C`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -502,4 +582,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-02 16:11:56
+-- Dump completed on 2021-12-03 16:27:22
