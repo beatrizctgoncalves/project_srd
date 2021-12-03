@@ -1,4 +1,4 @@
-#CREATE DATABASE `database_womensmell`;
+CREATE DATABASE `database_womensmell`;
 USE database_womensmell;
 
 
@@ -47,6 +47,13 @@ CREATE TABLE IF NOT EXISTS `Fragrance_Class`(
   `fragrance_class_name` VARCHAR(20) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS `Fragrance`(
+  `fragrance_id` SERIAL NOT NULL PRIMARY KEY,
+  `fragrance_class_id` BIGINT UNSIGNED NOT NULL,
+  `fragrance_name` VARCHAR(20) NOT NULL,
+  FOREIGN KEY(fragrance_class_id) REFERENCES Fragrance_Class(fragrance_class_id)
+);
+
 CREATE TABLE IF NOT EXISTS `Product_Color`(
   `product_color_id` SERIAL NOT NULL PRIMARY KEY,
   `product_color_name` VARCHAR(20) NOT NULL
@@ -55,14 +62,6 @@ CREATE TABLE IF NOT EXISTS `Product_Color`(
 CREATE TABLE IF NOT EXISTS `Product_Size`(
   `product_size_id` SERIAL NOT NULL PRIMARY KEY,
   `product_size_name` VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS `Fragrance`(
-  `fragrance_id` SERIAL NOT NULL,
-  `fragrance_class_id` BIGINT UNSIGNED NOT NULL,
-  `fragrance_name` VARCHAR(20) NOT NULL,
-  FOREIGN KEY(fragrance_class_id) REFERENCES Fragrance_Class(fragrance_class_id),
-  PRIMARY KEY(`fragrance_id`, fragrance_class_id)
 );
 
 CREATE TABLE IF NOT EXISTS `Product`(
@@ -101,7 +100,6 @@ CREATE TABLE IF NOT EXISTS `Orders` (
   `order_id` SERIAL NOT NULL PRIMARY KEY,
   `client_id` BIGINT UNSIGNED NOT NULL,
   `discount_id` BIGINT UNSIGNED DEFAULT NULL,
-  `total_amount` INT NOT NULL DEFAULT 0,
   `due_date` DATETIME NOT NULL,
   FOREIGN KEY(client_id) REFERENCES Client_User(client_id),
   FOREIGN KEY(discount_id) REFERENCES Discount(discount_id)
@@ -119,9 +117,8 @@ CREATE TABLE IF NOT EXISTS `Order_Product` (
 CREATE TABLE IF NOT EXISTS `Invoice` (
   `invoice_id` SERIAL NOT NULL PRIMARY KEY,
   `order_id` BIGINT UNSIGNED NOT NULL,
-  `sales_amount` FLOAT NOT NULL,
   `tax_rate` FLOAT NOT NULL,
-  `tax_amount` FLOAT NOT NULL,
+  `subtotal` FLOAT NOT NULL,
   `status` BOOLEAN NOT NULL DEFAULT FALSE,
   `due_date` DATE NOT NULL,
   FOREIGN KEY(`order_id`) REFERENCES `Orders`(`order_id`)
