@@ -23,8 +23,23 @@ LIMIT 3;
 -- Exercise 3
 -- Get the average amount of sales/bookings/rents/deliveries for a period that involves 2 or more years.
 
+SELECT '01/2018 - 12/2021' AS 'PeriodOfSales',
+ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100)), 2) AS 'TotalSales',
+ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100) / 3), 2) AS 'YearlyAverage',
+ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100) / 36), 2) AS 'MonthlyAverage'
+FROM Invoice AS I
+Join Orders AS O ON O.order_id = I.order_id
+JOIN Discount AS D ON O.discount_id = D.discount_id;
+
 -- Exercise 4
 -- Get the total sales/bookings/rents/deliveries by geographical location (city/country).
+
+SELECT client_city, ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100)), 2) AS 'Total Sales'
+FROM Invoice AS I
+JOIN Orders AS O ON O.order_id = I.order_id
+JOIN Discount AS D ON O.discount_id = D.discount_id
+JOIN client_address AS CA ON O.client_id = CA.client_id
+GROUP BY client_city
 
 
 -- Exercise 5
