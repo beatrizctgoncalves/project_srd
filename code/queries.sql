@@ -1,47 +1,50 @@
--- Exercise 1
--- List all the customer’s names, dates, and products or services used/booked/rented/bought
--- by these customers in a range of two dates.
 USE database_womensmell;
 
+-- Exercise 1
 SELECT CONCAT(CU.client_name, ' ', CU.client_surname) AS 'Client Name', O.due_date AS 'Order Date', F.fragrance_name AS 'Product Name'
 FROM Orders AS O, Order_Product AS OP, Client_User AS CU, Fragrance AS F, Product AS P
 WHERE O.order_id = OP.order_id AND O.client_id = CU.client_id AND OP.product_id = P.product_id AND P.fragrance_id = F.fragrance_id
-AND O.due_date > '2020-01-01 08:00:00' AND O.due_date < '2020-12-31 23:59:59';
+AND O.due_date BETWEEN '2020-01-01 08:00:00' AND '2020-12-31 23:59:59';
+/*
+The query is optimized as well as possible because MySQL can use indexes on columns more efficiently if they are declared
+as the same type and size. As it shows in column key_len, all tables has the same length.
+The rows column in the output from EXPLAIN is an educated guess from the MySQL join optimizer. As it shows in column rows,
+the numbers are correct because if we compare the rows product with the actual number of rows that the query returns it is the same.
+*/
 
 -- Exercise 2
--- List the best three customers/products/services/places (you are free to define the criteria for what means “best”).
--- Note: We define a “best product” as a product with the highest ratings from clients.
-USE database_womensmell;
-
-SELECT F.fragrance_name AS 'Product Name', PR.grade AS 'Product Rating'
+-- We define a “best product” as a product with the highest ratings from clients.
+ SELECT F.fragrance_name AS 'Product Name', PR.grade AS 'Product Rating'
 FROM Product_Rating AS PR
 JOIN Product AS P ON PR.product_id = P.product_id
 JOIN Fragrance AS F ON P.fragrance_id = F.fragrance_id
 ORDER BY PR.grade DESC
 LIMIT 3;
+/*
+The query is optimized as well as possible because the indexes on columns are declared as the same type and size.
+As it shows in column key_len, all tables has the same length and the same type as it can be seen in table type.
+The rows column in the output from EXPLAIN is an educated guess from the MySQL join optimizer. As it shows in column rows,
+the numbers are correct because if we compare the rows product with the actual number of rows that the query returns
+we can conclude that it is equal.
+*/
 
 -- Exercise 3
--- Get the average amount of sales/bookings/rents/deliveries for a period that involves 2 or more years.
-
 SELECT '01/2018 - 12/2021' AS 'PeriodOfSales',
 ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100)), 2) AS 'TotalSales',
 ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100) / 3), 2) AS 'YearlyAverage',
 ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100) / 36), 2) AS 'MonthlyAverage'
 FROM Invoice AS I
-Join Orders AS O ON O.order_id = I.order_id
-JOIN Discount AS D ON O.discount_id = D.discount_id;
-
--- Exercise 4
--- Get the total sales/bookings/rents/deliveries by geographical location (city/country).
-
-SELECT client_city, ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100)), 2) AS 'Total Sales'
-FROM Invoice AS I
 JOIN Orders AS O ON O.order_id = I.order_id
 JOIN Discount AS D ON O.discount_id = D.discount_id
-JOIN client_address AS CA ON O.client_id = CA.client_id
-GROUP BY client_city
+AND I.due_date BETWEEN '2018-01-01' AND '2020-12-31';
 
+-- Exercise 4
+SELECT client_city AS Location, ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100)), 2) AS 'Total Sales'
+FROM Invoice AS I, Orders AS O, Discount AS D, client_address AS CA
+WHERE O.order_id = I.order_id  AND O.discount_id = D.discount_id AND O.client_id = CA.client_id
+GROUP BY Location;
 
 -- Exercise 5
--- List all the locations where products/services were sold, and the product has customer’s ratings
--- (Yes, your ERD must consider that customers can give ratings).
+SELECT DISTINCT client_city AS Location
+FROM client_address AS CA, Product_Rating AS PR
+WHERE CA.client_id = PR.client_id;
