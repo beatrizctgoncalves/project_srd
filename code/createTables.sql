@@ -1,4 +1,4 @@
-#CREATE DATABASE `database_womensmell`;
+CREATE DATABASE `database_womensmell`;
 USE database_womensmell;
 
 
@@ -125,9 +125,12 @@ CREATE TABLE IF NOT EXISTS `Invoice` (
 );
 
 -- The source table to track the changes
-CREATE TABLE `Log` (
-	  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	  timestamp TIMESTAMP,
-	  data1 VARCHAR(255) NOT NULL,
-	  data2 DECIMAL(5,2) NOT NULL 
+CREATE TABLE `Log_Product` (
+	log_product_id SERIAL NOT NULL PRIMARY KEY,
+	product_id BIGINT UNSIGNED NOT NULL,
+	old_price FLOAT NOT NULL,
+	new_price FLOAT NOT NULL,
+    action VARCHAR(255),
+	timestamp TIMESTAMP,
+	FOREIGN KEY(`product_id`) REFERENCES `Product`(`product_id`)
 );

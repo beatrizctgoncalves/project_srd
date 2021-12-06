@@ -1,14 +1,13 @@
 -- Add a log entry for insert actions
--- This will record action time and newly added data values
 DELIMITER $$
-CREATE TRIGGER insert_data AFTER INSERT ON Log
-	FOR EACH ROW
-	BEGIN
-	  INSERT INTO Log (action, id, timestamp, data1, data2)
-		VALUES('insert', NEW.id, NOW(), NEW.data1, NEW.data2);
-	END$$
+CREATE TRIGGER insert_data
+AFTER UPDATE ON Product
+FOR EACH ROW
+BEGIN
+	INSERT INTO Log_Product(log_product_id, product_id, old_price, new_price, action, timestamp)
+	VALUES(OLD.product_id, OLD.product_price, NEW.product_price, 'update', NOW());
+END$$
 DELIMITER ;
-
 
 -- Update the available stock of products
 DELIMITER $$

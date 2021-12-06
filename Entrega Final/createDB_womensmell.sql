@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `database_womensmell` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `database_womensmell`;
 -- MySQL dump 10.13  Distrib 8.0.27, for macos11 (arm64)
 --
 -- Host: localhost    Database: database_womensmell
@@ -266,47 +268,34 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
--- Table structure for table `Log`
+-- Table structure for table `Log_Product`
 --
 
-DROP TABLE IF EXISTS `Log`;
+DROP TABLE IF EXISTS `Log_Product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Log` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Log_Product` (
+  `log_product_id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` bigint unsigned NOT NULL,
+  `old_price` float NOT NULL,
+  `new_price` float NOT NULL,
+  `action` varchar(255) DEFAULT NULL,
   `timestamp` timestamp NULL DEFAULT NULL,
-  `data1` varchar(255) NOT NULL,
-  `data2` decimal(5,2) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`log_product_id`),
+  UNIQUE KEY `log_product_id` (`log_product_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `log_product_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Log`
+-- Dumping data for table `Log_Product`
 --
 
-LOCK TABLES `Log` WRITE;
-/*!40000 ALTER TABLE `Log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Log` ENABLE KEYS */;
+LOCK TABLES `Log_Product` WRITE;
+/*!40000 ALTER TABLE `Log_Product` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Log_Product` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `insert_data` AFTER INSERT ON `log` FOR EACH ROW BEGIN
-	  INSERT INTO Log (action, id, timestamp, data1, data2)
-		VALUES('insert', NEW.id, NOW(), NEW.data1, NEW.data2);
-	END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `Order_Product`
@@ -426,6 +415,24 @@ LOCK TABLES `Product` WRITE;
 INSERT INTO `Product` VALUES (1,1,1,1,1,16.2,10),(2,2,3,2,1,20.25,5),(3,3,2,3,1,24.99,6),(4,4,4,4,1,40.5,8),(5,5,5,5,1,35.99,7),(6,6,6,1,1,45.49,9),(7,7,1,2,1,64.8,11),(8,8,2,3,1,44.5,12),(9,9,3,4,1,36.45,6),(10,10,4,5,1,48.6,7),(11,11,5,1,1,81,8),(12,12,6,2,1,97.2,9),(13,1,1,3,1,81,6),(14,2,2,4,1,145.8,6),(15,3,3,5,1,32.4,7),(16,4,4,1,1,52.65,7),(17,5,5,2,1,64.8,8),(18,6,6,3,1,52.65,8),(19,7,1,4,1,19.99,5),(20,8,2,5,1,29.99,9);
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `insert_data` AFTER UPDATE ON `product` FOR EACH ROW BEGIN
+	INSERT INTO Log_Product(log_product_id, product_id, old_price, new_price, action, timestamp)
+	VALUES(OLD.product_id, OLD.product_price, NEW.product_price, 'update', NOW());
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `Product_Color`
@@ -582,4 +589,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-03 16:27:22
+-- Dump completed on 2021-12-06 18:56:48

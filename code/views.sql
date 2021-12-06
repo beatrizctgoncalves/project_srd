@@ -1,7 +1,6 @@
 USE database_womensmell;
 
 -- View for the head and totals of the Invoice
-DROP VIEW IF EXISTS invoice_head_totals_view;
 CREATE VIEW invoice_head_totals_view AS
 -- HEAD --
 SELECT I.invoice_id AS 'INVOICE NUMBER',
@@ -40,7 +39,6 @@ JOIN Company AS C;
 SELECT * FROM invoice_head_totals_view;
 
 -- View for the details of the Invoice
-DROP VIEW IF EXISTS invoice_details_view;
 CREATE VIEW invoice_details_view AS
 SELECT I.invoice_id AS 'INVOICE NUMBER',
 F.fragrance_name AS 'FRAGRANCE NAME',
