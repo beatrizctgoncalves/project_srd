@@ -16,7 +16,7 @@ AFTER INSERT ON Order_Product
 FOR EACH ROW
 BEGIN
 	UPDATE Product
-		SET product_quantity = product_quantity - New.quantity
+		SET product_quantity = product_quantity - NEW.quantity
 	WHERE product_id = NEW.product_id;
 END$$
 DELIMITER ;
