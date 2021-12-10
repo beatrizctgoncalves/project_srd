@@ -222,52 +222,6 @@ INSERT INTO `Invoice` VALUES (1,1,23,16.2,1,'2020-04-06'),(2,2,23,59.98,1,'2018-
 UNLOCK TABLES;
 
 --
--- Temporary view structure for view `invoice_details_view`
---
-
-DROP TABLE IF EXISTS `invoice_details_view`;
-/*!50001 DROP VIEW IF EXISTS `invoice_details_view`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `invoice_details_view` AS SELECT 
- 1 AS `INVOICE NUMBER`,
- 1 AS `FRAGRANCE NAME`,
- 1 AS `UNIT COST`,
- 1 AS `QUANTITY`,
- 1 AS `AMOUNT`*/;
-SET character_set_client = @saved_cs_client;
-
---
--- Temporary view structure for view `invoice_head_totals_view`
---
-
-DROP TABLE IF EXISTS `invoice_head_totals_view`;
-/*!50001 DROP VIEW IF EXISTS `invoice_head_totals_view`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `invoice_head_totals_view` AS SELECT 
- 1 AS `INVOICE NUMBER`,
- 1 AS `DATE OF ISSUE`,
- 1 AS `Client Name`,
- 1 AS `Street Address`,
- 1 AS `City`,
- 1 AS `Country`,
- 1 AS `Postal Code`,
- 1 AS `Company Name`,
- 1 AS `Company Address`,
- 1 AS `Company Phone`,
- 1 AS `Company E-mail`,
- 1 AS `Company Website`,
- 1 AS `TERMS`,
- 1 AS `SUBTOTAL`,
- 1 AS `DISCOUNT RATE (%)`,
- 1 AS `DISCOUNT`,
- 1 AS `TAX RATE (%)`,
- 1 AS `TAX`,
- 1 AS `TOTAL`*/;
-SET character_set_client = @saved_cs_client;
-
---
 -- Table structure for table `Log_Product`
 --
 
@@ -285,7 +239,7 @@ CREATE TABLE `Log_Product` (
   UNIQUE KEY `log_product_id` (`log_product_id`),
   KEY `product_id` (`product_id`),
   CONSTRAINT `log_product_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,6 +248,7 @@ CREATE TABLE `Log_Product` (
 
 LOCK TABLES `Log_Product` WRITE;
 /*!40000 ALTER TABLE `Log_Product` DISABLE KEYS */;
+INSERT INTO `Log_Product` VALUES (1,1,16.2,16.2,'update','2021-12-10 15:15:14'),(2,2,20.25,20.25,'update','2021-12-10 15:15:14'),(3,3,24.99,24.99,'update','2021-12-10 15:15:14'),(4,4,40.5,40.5,'update','2021-12-10 15:15:14'),(5,5,35.99,35.99,'update','2021-12-10 15:15:14'),(6,5,35.99,35.99,'update','2021-12-10 15:15:14'),(7,6,45.49,45.49,'update','2021-12-10 15:15:14'),(8,6,45.49,45.49,'update','2021-12-10 15:15:14'),(9,7,64.8,64.8,'update','2021-12-10 15:15:14'),(10,8,44.5,44.5,'update','2021-12-10 15:15:14'),(11,8,44.5,44.5,'update','2021-12-10 15:15:14'),(12,9,36.45,36.45,'update','2021-12-10 15:15:14'),(13,9,36.45,36.45,'update','2021-12-10 15:15:14'),(14,8,44.5,44.5,'update','2021-12-10 15:15:14'),(15,7,64.8,64.8,'update','2021-12-10 15:15:14'),(16,6,45.49,45.49,'update','2021-12-10 15:15:14'),(17,5,35.99,35.99,'update','2021-12-10 15:15:14'),(18,4,40.5,40.5,'update','2021-12-10 15:15:14'),(19,3,24.99,24.99,'update','2021-12-10 15:15:14'),(20,2,20.25,20.25,'update','2021-12-10 15:15:14');
 /*!40000 ALTER TABLE `Log_Product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,8 +293,8 @@ UNLOCK TABLES;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `StockUpdate` AFTER INSERT ON `order_product` FOR EACH ROW BEGIN
 	UPDATE Product
-		SET product_quantity = product_quantity - New.quantity
-	WHERE product_id = NEW.product_id;
+		SET product_quantity = product_quantity - NEW.quantity
+		WHERE product_id = NEW.product_id;
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -412,7 +367,7 @@ CREATE TABLE `Product` (
 
 LOCK TABLES `Product` WRITE;
 /*!40000 ALTER TABLE `Product` DISABLE KEYS */;
-INSERT INTO `Product` VALUES (1,1,1,1,1,16.2,10),(2,2,3,2,1,20.25,5),(3,3,2,3,1,24.99,6),(4,4,4,4,1,40.5,8),(5,5,5,5,1,35.99,7),(6,6,6,1,1,45.49,9),(7,7,1,2,1,64.8,11),(8,8,2,3,1,44.5,12),(9,9,3,4,1,36.45,6),(10,10,4,5,1,48.6,7),(11,11,5,1,1,81,8),(12,12,6,2,1,97.2,9),(13,1,1,3,1,81,6),(14,2,2,4,1,145.8,6),(15,3,3,5,1,32.4,7),(16,4,4,1,1,52.65,7),(17,5,5,2,1,64.8,8),(18,6,6,3,1,52.65,8),(19,7,1,4,1,19.99,5),(20,8,2,5,1,29.99,9);
+INSERT INTO `Product` VALUES (1,1,1,1,1,16.2,9),(2,2,3,2,1,20.25,1),(3,3,2,3,1,24.99,4),(4,4,4,4,1,40.5,3),(5,5,5,5,1,35.99,-3),(6,6,6,1,1,45.49,4),(7,7,1,2,1,64.8,5),(8,8,2,3,1,44.5,6),(9,9,3,4,1,36.45,1),(10,10,4,5,1,48.6,7),(11,11,5,1,1,81,8),(12,12,6,2,1,97.2,9),(13,1,1,3,1,81,6),(14,2,2,4,1,145.8,6),(15,3,3,5,1,32.4,7),(16,4,4,1,1,52.65,7),(17,5,5,2,1,64.8,8),(18,6,6,3,1,52.65,8),(19,7,1,4,1,19.99,5),(20,8,2,5,1,29.99,9);
 /*!40000 ALTER TABLE `Product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -424,8 +379,8 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `insert_data` AFTER UPDATE ON `product` FOR EACH ROW BEGIN
-	INSERT INTO Log_Product(log_product_id, product_id, old_price, new_price, action, timestamp)
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `InsertDataIntoTableLog` AFTER UPDATE ON `product` FOR EACH ROW BEGIN
+	INSERT INTO Log_Product(product_id, old_price, new_price, action, timestamp)
 	VALUES(OLD.product_id, OLD.product_price, NEW.product_price, 'update', NOW());
 END */;;
 DELIMITER ;
@@ -543,42 +498,6 @@ LOCK TABLES `Warehouse` WRITE;
 INSERT INTO `Warehouse` VALUES (1,'NewSmell Warehouse','Avenida Infante Dom Henrique Armazém O','Lisboa','1950-408');
 /*!40000 ALTER TABLE `Warehouse` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Final view structure for view `invoice_details_view`
---
-
-/*!50001 DROP VIEW IF EXISTS `invoice_details_view`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `invoice_details_view` AS select `I`.`invoice_id` AS `INVOICE NUMBER`,`F`.`fragrance_name` AS `FRAGRANCE NAME`,`P`.`product_price` AS `UNIT COST`,`OP`.`quantity` AS `QUANTITY`,round((`P`.`product_price` * `OP`.`quantity`),2) AS `AMOUNT` from ((((`invoice` `I` join `orders` `O` on((`I`.`order_id` = `O`.`order_id`))) join `order_product` `OP` on((`O`.`order_id` = `OP`.`order_id`))) join `product` `P` on((`OP`.`product_id` = `P`.`product_id`))) join `fragrance` `F` on((`P`.`fragrance_id` = `F`.`fragrance_id`))) order by `I`.`invoice_id` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `invoice_head_totals_view`
---
-
-/*!50001 DROP VIEW IF EXISTS `invoice_head_totals_view`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `invoice_head_totals_view` AS select `I`.`invoice_id` AS `INVOICE NUMBER`,`I`.`due_date` AS `DATE OF ISSUE`,concat(`CU`.`client_name`,' ',`CU`.`client_surname`) AS `Client Name`,`CA`.`client_address` AS `Street Address`,`CA`.`client_city` AS `City`,`CA`.`client_country` AS `Country`,`CA`.`client_postalcode` AS `Postal Code`,`C`.`company_name` AS `Company Name`,concat(`C`.`company_address`,', ',`C`.`company_postalcode`,' ',`C`.`company_city`,', ',`C`.`company_country`) AS `Company Address`,`C`.`company_phone` AS `Company Phone`,`C`.`company_email` AS `Company E-mail`,`C`.`company_website` AS `Company Website`,cast((`I`.`due_date` + interval 3 day) as date) AS `TERMS`,`I`.`subtotal` AS `SUBTOTAL`,`D`.`discount_value` AS `DISCOUNT RATE (%)`,round((`I`.`subtotal` * (`D`.`discount_value` / 100)),2) AS `DISCOUNT`,`I`.`tax_rate` AS `TAX RATE (%)`,round(((`I`.`subtotal` * (1 - (`D`.`discount_value` / 100))) * (`I`.`tax_rate` / 100)),2) AS `TAX`,round(((`I`.`subtotal` - (`I`.`subtotal` * (`D`.`discount_value` / 100))) + ((`I`.`subtotal` * (1 - (`D`.`discount_value` / 100))) * (`I`.`tax_rate` / 100))),2) AS `TOTAL` from (((((`orders` `O` join `invoice` `I` on((`O`.`order_id` = `I`.`order_id`))) left join `discount` `D` on((`O`.`discount_id` = `D`.`discount_id`))) left join `client_user` `CU` on((`CU`.`client_id` = `O`.`client_id`))) left join `client_address` `CA` on((`CU`.`client_id` = `CA`.`client_id`))) join `company` `C`) */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -589,4 +508,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-06 18:56:48
+-- Dump completed on 2021-12-10 15:16:51

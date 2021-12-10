@@ -101,7 +101,7 @@ INSERT INTO `Fragrance` VALUES (1, 1, 'Budapest'),
 (19, 2, 'Vienna'),
 (20, 3, 'Zagreb');
 
-INSERT INTO `Product` VALUES (1, 1, 1, 1, 1, 16.20, 10),
+INSERT INTO `Product`(product_id, fragrance_id, product_color_id, product_size_id, warehouse_id, product_price, product_quantity) VALUES (1, 1, 1, 1, 1, 16.20, 10),
 (2, 2, 3, 2, 1, 20.25, 5),
 (3, 3, 2, 3, 1, 24.99, 6),
 (4, 4, 4, 4, 1, 40.50, 8),
@@ -168,7 +168,7 @@ INSERT INTO `Orders` VALUES (1, 1, 1, '2018-10-04 08:12:34'),
 (19, 19, 1, '2021-03-01 12:35:24'),
 (20, 20, 2, '2021-10-04 10:23:11');
 
-INSERT INTO `Order_Product` VALUES (1, 1, 1, 1),
+INSERT INTO `Order_Product`(order_product_id, order_id, product_id, quantity) VALUES (1, 1, 1, 1),
 (2, 2, 2, 2),
 (3, 3, 3, 1),
 (4, 4, 4, 3),
