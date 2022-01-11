@@ -130,7 +130,6 @@ CREATE TABLE `Log_Product` (
 	product_id BIGINT UNSIGNED NOT NULL,
 	old_price FLOAT NOT NULL,
 	new_price FLOAT NOT NULL,
-    action VARCHAR(255),
 	timestamp TIMESTAMP,
 	FOREIGN KEY(`product_id`) REFERENCES `Product`(`product_id`)
 );

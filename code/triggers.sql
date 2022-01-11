@@ -6,8 +6,8 @@ CREATE TRIGGER InsertDataIntoTableLog
 AFTER UPDATE ON Product
 FOR EACH ROW
 BEGIN
-	INSERT INTO Log_Product(product_id, old_price, new_price, action, timestamp)
-	VALUES(OLD.product_id, OLD.product_price, NEW.product_price, 'update', NOW());
+	INSERT INTO Log_Product(product_id, old_price, new_price, timestamp)
+	VALUES(OLD.product_id, OLD.product_price, NEW.product_price, NOW());
 END$$
 
 -- Update the available stock of products
