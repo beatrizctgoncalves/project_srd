@@ -36,8 +36,6 @@ LEFT JOIN Client_Address AS CA
 ON CU.client_id = CA.client_id
 JOIN Company AS C;
 
-SELECT * FROM invoice_head_totals_view;
-
 -- View for the details of the Invoice
 CREATE VIEW invoice_details_view AS
 SELECT I.invoice_id AS 'INVOICE NUMBER',
@@ -52,4 +50,7 @@ JOIN Product AS P ON OP.product_id = P.product_id)
 JOIN Fragrance AS F ON P.fragrance_id = F.fragrance_id)
 ORDER BY I.invoice_id;
 
+/*** TEST VIEWS ***/
+-- Observe views
+SELECT * FROM invoice_head_totals_view;
 SELECT * FROM invoice_details_view;

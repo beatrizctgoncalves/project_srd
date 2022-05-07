@@ -1,4 +1,4 @@
-DROP TABLE `Log`;
+DROP TABLE `Log_Product`;
 DROP TABLE `Invoice`;
 DROP TABLE `Order_Product`;
 DROP TABLE `Orders`;

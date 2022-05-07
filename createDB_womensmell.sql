@@ -1,3 +1,6 @@
+CREATE DATABASE  IF NOT EXISTS `database_womensmell` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `database_womensmell`;
+
 -- MySQL dump 10.13  Distrib 8.0.27, for macos11 (arm64)
 --
 -- Host: localhost    Database: database_womensmell

@@ -73,7 +73,7 @@ as the same type and size (tables type and key_len). We also have various possib
 
 -- Exercise 4 --
 SELECT client_city AS Location, ROUND(SUM(I.subtotal * (1 - (D.discount_value) / 100)), 2) AS 'Total Sales'
-FROM Invoice AS I, Orders AS O, Discount AS D, client_address AS CA
+FROM Invoice AS I, Orders AS O, Discount AS D, Client_Address AS CA
 WHERE O.order_id = I.order_id  AND O.discount_id = D.discount_id AND O.client_id = CA.client_id
 GROUP BY Location;
 -- Interpretation of the query execution plan

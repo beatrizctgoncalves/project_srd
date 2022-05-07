@@ -1,18 +1,82 @@
 CREATE DATABASE `database_womensmell`;
 USE database_womensmell;
 
-
-CREATE TABLE IF NOT EXISTS `Company` (
-  `company_id` SERIAL NOT NULL PRIMARY KEY,
-  `company_name` VARCHAR(15) NOT NULL,
-  `company_email` VARCHAR(20) NOT NULL,
-  `company_phone` VARCHAR(14) NOT NULL,
-  `company_website` VARCHAR(20) NOT NULL,
-  `company_address` VARCHAR(100) NOT NULL,
-  `company_postalcode` VARCHAR(10) NOT NULL,
-  `company_city` VARCHAR(20) NOT NULL,
-  `company_country` VARCHAR(20) NOT NULL
+CREATE TABLE IF NOT EXISTS `tA` (
+  `idx` SERIAL NOT NULL PRIMARY KEY,
+  `Attr1` VARCHAR(15),
+  `Attr2` VARCHAR(20)
 );
+CREATE TABLE IF NOT EXISTS `tB` (
+  `Idx` SERIAL NOT NULL PRIMARY KEY,
+  `Attr1` VARCHAR(15),
+  `Attr2` VARCHAR(20)
+);
+CREATE TABLE IF NOT EXISTS `employees` (
+  `emp_no` SERIAL NOT NULL PRIMARY KEY,
+  `birth_date` VARCHAR(20),
+  `first_name` VARCHAR(20),
+  `last_name` VARCHAR(15),
+  `gender`VARCHAR(15),
+  `hire_date` DATETIME,
+  `salary` INT
+);
+
+INSERT INTO `tA` (`idx`, `Attr1`, `Attr2`) VALUES (1, 'a1', 'a2'),
+(2, 'b1', 'a2'),
+(5, 'a', NULL);
+INSERT INTO `tB` VALUES (1, 'A1', 'a2'),
+(3, 'C1', 'C2'),
+(4, 'A2', 'a2'),
+(2, 'f1', 'ola'),
+(5, NULL, 'E2');
+INSERT INTO `employees` VALUES (259980, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(240104, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(427857, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(295047, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(290672, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(430852, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(48255, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(63128, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(102987, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821),
+(431777, '1963-06-11', 'Mary', 'Muntz', 'F', '1962-08-03', 99821);
+
+SELECT * FROM tA
+JOIN tB ON tA.Attr2 = tB.Attr2;
+-- LIMIT 2;
+
+SELECT * FROM tA
+RIGHT JOIN tB ON tA.Attr2 = tB.Attr2
+WHERE tA.Attr2 IS NULL;
+
+SELECT tA.`Attr2`, count(1) as c FROM tA
+JOIN tB ON tA.Attr2 = tB.Attr2
+GROUP BY tA.`Attr2`;
+
+/* ERROR:
+SELECT `Attr1`, count(1) as c FROM tA
+GROUP BY `Attr1`
+HAVING `Attr2` = NULL;
+*/
+
+SELECT `Attr2`, count(`Attr2`) as c FROM tA
+GROUP BY `Attr2`
+HAVING c > 1;
+
+SELECT tB.`Attr1` FROM tA
+RIGHT JOIN tB ON tA.idx=tB.idx
+WHERE tA.idx IS NULL;
+
+SELECT `Attr1`, count(1) as c FROM tA
+WHERE `Attr2` = NULL
+GROUP BY `Attr1`;
+
+SELECT YEAR(birth_date) y, AVG(salary) salary, COUNT(1) c
+FROM employees
+GROUP BY YEAR (birth_date);
+
+
+
+
 
 
 CREATE TABLE `Client_User` (
@@ -34,6 +98,10 @@ CREATE TABLE IF NOT EXISTS `Client_Address` (
   FOREIGN KEY(`client_id`) REFERENCES Client_User(`client_id`)
 );
 
+DELETE FROM `Client_User` WHERE `client_id`=1;
+
+
+/*
 CREATE TABLE IF NOT EXISTS `Warehouse`(
   `warehouse_id` SERIAL NOT NULL PRIMARY KEY,
   `warehouse_name` VARCHAR(20) NOT NULL,
@@ -132,4 +200,4 @@ CREATE TABLE `Log_Product` (
 	new_price FLOAT NOT NULL,
 	timestamp TIMESTAMP,
 	FOREIGN KEY(`product_id`) REFERENCES `Product`(`product_id`)
-);
+);*/
